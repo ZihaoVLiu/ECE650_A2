@@ -1,39 +1,49 @@
+// Compile with c++ ece650-a2cpp -std=c++11 -o ece650-a2
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 int main(int argc, char** argv) {
-    // test code. Replaced with your code
+    // Test code. Replaced with your code
     std::cout << "Called with " << argc << " arguments\n";
-    for (unsigned i = 0; i < argc; ++i) {
+    for (int i = 0; i < argc; ++i)
         std::cout << "Arg " << i << " is " << argv[i] << "\n";
-    }
-    std::cout << "Enter a numbers separated by comma: ";
 
-    std::vector<unsigned> nums;
-    char c = ',';
+    const char comma = ',';
 
-    while (c == ',' && !std::cin.fail() && !std::cin.eof()) {
-        c = 0;
-        unsigned num;
-        std::cin >> num;
-        if (std::cin.fail() || std::cin.eof()) break;
-        nums.push_back(num);
-        std::cin >> c;
-        std::cerr << "got char: " << c << "\n";
-    }
+    while (!std::cin.eof()) {
+        std::cout << "Enter a numbers separated by comma: ";
 
-    if (std::cin.fail()) {
-        std::cout << "Error parsing input\n";
-    }
+        std::string line;
+        std::getline(std::cin, line);
+        std::istringstream input(line);
+        std::vector<unsigned> nums;
 
-    if (!nums.empty()) {
-        std::cout << "You have entered " << nums.size() << " numbers\n";
-        for (std::vector<unsigned>::iterator it = nums.begin(), end = nums.end();
-             it != end; ++it) {
-            std::cout << *it;
-            if (it+1 != end)
-                std::cout << ",";
+        while (!input.eof()) {
+            unsigned num;
+            if (!(input >> num))
+                std::cerr << "Error parsing number\n";
+            else
+                nums.push_back(num);
+
+            if (input.eof())
+                break;
+
+            char separator;
+            if (!(input >> separator) || separator != comma) {
+                std::cerr << "Error parsing separator\n";
+                break;
+            }
         }
+
+        if (!nums.empty()) {
+            std::cout << "\nYou have entered " << nums.size() << " numbers: ";
+            size_t i = 0;
+            for (unsigned& x : nums) {
+                std::cout << x;
+                if (++i < nums.size()) std::cout << ", ";
+            }
+        }
+        std::cout << std::endl;
     }
-    std::cout << "\n";
 }
