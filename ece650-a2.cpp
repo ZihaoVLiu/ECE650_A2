@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     const char comma = ',';
 
     while (!std::cin.eof()) {
-        std::cout << "Enter a numbers separated by comma: ";
+        std::cout << "Enter numbers separated by comma: ";
 
         std::string line;
         std::getline(std::cin, line);
