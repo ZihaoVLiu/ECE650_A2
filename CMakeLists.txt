@@ -38,6 +38,9 @@ endif()
 ## ECE650 Specific configuration start here
 ## Project specific configurations go here
 
+# enable c++11 support
+set (CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+
 # Trivial example using gtest 
 ## Adapt to use unit tests for your code
 add_executable(gtest_example gtest_example.cpp)
