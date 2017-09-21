@@ -35,13 +35,17 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
                         "${gmock_SOURCE_DIR}/include")
 endif()
 
+## ECE650 Specific configuration start here
 ## Project specific configurations go here
 
-# Trivial example using gtest and gmock
-add_executable(example example.cpp)
-target_link_libraries(example gtest gmock_main)
-add_test(NAME example_test COMMAND example)
+# Trivial example using gtest 
+## Adapt to use unit tests for your code
+add_executable(gtest_example gtest_example.cpp)
+target_link_libraries(gtest_example gtest gmock_main)
+## Tell cmake that we have a test
+add_test(NAME example_test COMMAND gtest_example)
 
-# create an executable
+# create the main executable
+## add additional .cpp files if needed
 add_executable(ece650-a2 ece650-a2.cpp)
 # no libraries at this time
