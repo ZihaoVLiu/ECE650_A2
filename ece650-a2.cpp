@@ -14,18 +14,8 @@ int EleLength;// the number of edge end and start points.
 int VNumber; //the number of vertexs.
 int ENumber; //the number of edges.
 int inf = 9999999; //define a infinite number.
-int graph[5000][5000];
-int parents[5000][5000];
-
-
-// function used to get the length of array.
-template<class T>
-int length(T& arr)
-{
-    //cout << sizeof(arr[0]) << endl;
-    //cout << sizeof(arr) << endl;
-    return sizeof(arr) / sizeof(arr[0]);
-}
+int graph[5000][5000]; // build a matrix to store graph structure.
+int parents[5000][5000]; // build matrix to store the path.
 
 // function to get the input string.
 string getString(){
@@ -142,12 +132,22 @@ void print_path(int i, int j){
         cout << j << endl;
 }
 
-// If input edge end point exceeds the vertex number, an error will be output.
+// detect is there a edge between two input node.
+int IsCovered(){
+    if (graph[startendList[0]][startendList[1]] == inf){
+        cout << "Error: There is no edge between start and end nodes." << endl;
+        return 0;
+    }
+    return 1;
+}
+
+
+// If input edge nodes exceeds the vertex number, an error will be output.
 int eInVertex(){
     int temp = 1;
     for (int i = 0; i < EleLength; ++i) {
         if (edgeList[i] >= VNumber) {
-            cout << "Error: Input edge end point does not exist." << endl;
+            cout << "Error: Input edge node does not exist." << endl;
             temp = 0;
             break;
         }
@@ -184,6 +184,7 @@ int main() {
         char firstChar = gather[0];
         if (firstChar == 'V'){
             getVNumber(gather);
+            continue;
         }
         if (firstChar == 'E'){
             getEdgeArr(gather);
@@ -194,59 +195,24 @@ int main() {
             judge = 0;
             twoArray();
             floyd();
+            continue;
         }
         if (firstChar == 's'){
             if (judge == 0) {
                 getStartEndPoint(gather);
                 if (sInEdge() == 0) continue;
+                if (IsCovered() == 0) continue;
                 print_path(startendList[0], startendList[1]);
+                continue;
             }
             else {
                 cout << "Error: No Edges are input." << endl;
                 continue;
             }
         }
-        if (firstChar != 'V' && firstChar != 'E' && firstChar != 's'){
+        /*if (firstChar != 'V' && firstChar != 'E' && firstChar != 's'){
             cout << "Error: Input is invalid." << endl;
-        }
+        }*/
+        return 0;
     }
-    return 0;
 }
-
-
-    /*string a;
-    a = getString();
-    getEdgeArr(a);
-    cout <<"elelength is: "<< EleLength << endl;
-    cout << "enumber is: " << ENumber << endl;
-    twoArray();
-    for (int i = 0; i < ENumber; ++i) {
-        cout << iarray[i] << " ";
-        cout << jarray[i] << " ";
-        cout << endl;
-    }
-
-
-
-
-    floyd();
-    for (int m = 0; m < VNumber; ++m) {
-        for (int n = 0; n < VNumber; ++n) {
-            printf("%10d", graph[m][n]);
-        }
-        cout << endl;
-    }
-
-    cout << endl;
-
-    for (int m = 0; m < VNumber; ++m) {
-        for (int n = 0; n < VNumber; ++n) {
-            printf("%10d", parents[m][n]);
-        }
-        cout << endl;
-    }
-
-    print_path(2,10);
-
-    return 0;
-}*/
