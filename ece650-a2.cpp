@@ -2,7 +2,6 @@
 //
 #include <iostream>
 #include <string>
-#include <regex>
 using namespace std;
 
 // build a array to store edge elements.
@@ -25,51 +24,57 @@ string getString(){
 }
 
 // function to append edge elements into the edgeList.
-void getEdgeArr(string gather){
-    smatch result;
-    regex pattern("-?[1-9]\\d*|0");
-    string::const_iterator iterStart = gather.begin();
-    string::const_iterator iterEnd = gather.end();
-    string temp;
+void getEdgeArr(string s){
+    int result = 0;
     int index = 0;
-    while (regex_search(iterStart, iterEnd, result, pattern)){
-        temp = result[0];
-        edgeList[index] = stoi(temp);
-        iterStart = result[0].second;
-        index += 1;
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (s[i] == ' ' || s[i] == '<') {
+            continue;
+        }
+        if (s[i] >= '0'&&s[i] <= '9'){
+            result= result * 10 + s[i] - 48;
+        }
+        if ((s[i] == ',' && s[i+1] >= '0'&&s[i+1] <= '9') || s[i] == '>'){
+            edgeList[index] = result;
+            result = 0;
+            index += 1;
+        }
     }
     EleLength = index;
     ENumber = index/2;
 }
 
 // function to get the start and end point after input 's'.
-void getStartEndPoint(string gather){
-    smatch result;
-    regex pattern("-?[1-9]\\d*|0");
-    string::const_iterator iterStart = gather.begin();
-    string::const_iterator iterEnd = gather.end();
-    string temp;
+void getStartEndPoint(string s){
+    int result = 0;
     int index = 0;
-    while (regex_search(iterStart, iterEnd, result, pattern)){
-        temp = result[0];
-        startendList[index] = stoi(temp);
-        iterStart = result[0].second;
-        index += 1;
+    for (int i = 2; i < s.size(); ++i)
+    {
+        if (s[i] >= '0'&&s[i] <= '9'){
+            result= result * 10 + s[i] - 48;
+        }
+        if (s[i] == ' ' || i == s.size()-1){
+            startendList[index] = result;
+            result = 0;
+            index += 1;
+        }
     }
 }
 
 // function to get the number of vertex. Using after input command V.
-void getVNumber(string gather){
-    smatch result;
-    regex pattern("[1-9]\\d*");
-    string::const_iterator iterStart = gather.begin();
-    string::const_iterator iterEnd = gather.end();
-    string temp;
-    while (regex_search(iterStart, iterEnd, result, pattern)){
-        temp = result[0];
-        iterStart = result[0].second;
+void getVNumber(string s){
+    int result = 0;
+    for (int i = 0; i < s.size(); ++i)
+    {
+        if (s[i] == ' ' || s[i] == '<') {
+            continue;
+        }
+        if (s[i] >= '0'&&s[i] <= '9'){
+            result= result * 10 + s[i] - 48;
+        }
     }
-    VNumber = stoi(temp);
+    VNumber = result;
 }
 
 // append i, j (start and end point of edges) into array.
@@ -175,7 +180,6 @@ int sInEdge(){
     }
 }
 
-
 int main() {
     for (;;)
     {
@@ -210,9 +214,6 @@ int main() {
                 continue;
             }
         }
-        /*if (firstChar != 'V' && firstChar != 'E' && firstChar != 's'){
-            cout << "Error: Input is invalid." << endl;
-        }*/
         return 0;
     }
 }
