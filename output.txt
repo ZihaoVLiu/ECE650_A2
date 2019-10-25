@@ -1,0 +1,178 @@
+Marking #46: StudentInfo(repo='z583liu', first='Zihao', last='Liu', watiam='z583liu', studentid=20750564, email='zihao.liu@uwaterloo.ca')
+Mark = 0
+
+Running test 0:	 +20
+
+
+--------------
+Running test: tests_a2/test01.in
+
+# test1.in: expect a line of error message, because vertex id go beyond range.
+# marks = 5
+
+V 5
+E {<3,4>,<4,6>}
+
+Output:
+----
+Error: Input edge node does not exist.
+----
+
+Expected result:
+----
+Error: Invalid vertice: 6
+----
+
+Marks: +5	(25 total)
+
+--------------
+Running test: tests_a2/test02.in
+
+# test2.in: expect a line of error message, because no path between the two vertices.
+# marks = 5
+
+V 7
+E {<1,2>,<2,3>,<3,4>,<3,5>}
+s 1 6 
+
+Output:
+----
+Error: Input s is not a edge node or not a vertex.
+----
+
+Expected result:
+----
+Error: No path between given vertices!
+----
+
+Marks: +5	(30 total)
+
+--------------
+Running test: tests_a2/test03.in
+
+# test3.in: expect a line of error message, because no path between the two vertices.
+# marks = 5
+
+V 9
+E {<1,2>,<3,4>,<5,6>,<7,8>,<2,4>}
+s 1 8
+
+Output:
+----
+Error: There is no edge between start and end nodes.
+----
+
+Expected result:
+----
+Error: No path between given vertices!
+----
+
+Marks: +5	(35 total)
+
+--------------
+Running test: tests_a2/test04.in
+
+# test4.in: expect a line of error message, because vertex id go beyond range.
+# marks = 5
+
+V 5
+E {<3,4>,<4,5>}
+
+Output:
+----
+Error: Input edge node does not exist.
+----
+
+Expected result:
+----
+Error: Invalid vertice: 5
+----
+
+Marks: +5	(40 total)
+
+--------------
+Running test: tests_a2/test05.in
+
+# test5.in: expect 0-1-2-3-4
+# marks = 15: 
+
+V 5
+E {<0,1>,<2,1>,<3,4>,<2,3>}
+s 0 4
+
+Output:
+----
+0-1-2-3-4
+----
+
+Expected result:
+----
+0-1-2-3-4
+----
+Comparison result:	NoneNone
+
+Marks: +15	(55 total)
+
+--------------
+Running test: tests_a2/test06.in
+
+# test6.in: expect 0-2-1-4
+# marks = 20:
+
+V 5
+E {<0,2>,<2,1>,<3,4>,<4,1>}
+s 0 4
+
+Output:
+----
+0-2-1-4
+----
+
+Expected result:
+----
+0-2-1-4
+----
+Comparison result:	NoneNone
+
+Marks: +20	(75 total)
+
+--------------
+Running test: tests_a2/test07.in
+
+# test7.in: expect 0-3-7-10-12
+# marks = 20: 
+
+V 15
+E {<0,1>,<0,4>,<1,4>,<2,4>,<0,3>,<1,2>,<3,7>,<3,5>,<3,8>,<5,6>,<6,7>,<7,8>,<5,8>,<6,8>,<7,10>,<7,9>,<9,10>,<6,9>,<6,10>,<10,12>,<10,11>,<10,13>,<12,13>,<11,13>,<11,12>}
+s 0 12
+
+Output:
+----
+0-3-7-10-12
+----
+
+Expected result:
+----
+0-3-7-10-12
+----
+Comparison result:	NoneNone
+
+Marks: +20	(95 total)
+
+
+--------------
+
+Finished marking
+Total mark: 95 / 100
+Final mark: 95
+
+           __    ______    ______   ________ 
+         _/  \  /      \  /      \ |        \
+        |   $$ |  $$$$$$\|  $$$$$$\ \$$$$$$$$
+         \$$$$  \$$__| $$ \$$__| $$    /  $$ 
+          | $$   |     $$  |     $$   /  $$  
+          | $$  __\$$$$$\ __\$$$$$\  /  $$   
+         _| $$_|  \__| $$|  \__| $$ /  $$    
+        |   $$ \\$$    $$ \$$    $$|  $$     
+         \$$$$$$ \$$$$$$   \$$$$$$  \$$      
+        
